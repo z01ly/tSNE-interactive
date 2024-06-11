@@ -21,7 +21,7 @@ def main():
 
     fig = px.scatter(df, x='f0', y='f1', color='label', hover_name='filename')
 
-    col1, col2 = st.columns([4, 1])
+    col1, col2 = st.columns([4, 1])  
 
     with col1:
         current_dict = st.plotly_chart(fig, on_select='rerun', selection_mode='points')
