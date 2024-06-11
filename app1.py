@@ -19,7 +19,17 @@ def main():
 
     st.title("t-SNE Plot Interactive")
 
-    fig = px.scatter(df, x='f0', y='f1', color='label', hover_name='filename')
+    color_map = {
+    'sdss': 'pink',
+    'AGNrt': 'red',
+    'NOAGNrt': 'green',
+    'TNG100': 'cyan',
+    'TNG50': 'purple',
+    'UHDrt': 'black',
+    'n80rt': 'orange'
+}
+
+    fig = px.scatter(df, x='f0', y='f1', color='label', color_discrete_map=color_map, hover_name='filename')
 
     col1, col2 = st.columns([4, 1])  
 
