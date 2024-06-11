@@ -1,3 +1,6 @@
+# https://docs.streamlit.io/develop/api-reference/charts/st.plotly_chart
+# https://github.com/streamlit/streamlit/issues/455#issuecomment-1811044197
+
 import os
 import pandas as pd
 import plotly.express as px
@@ -18,13 +21,17 @@ def main():
 
     fig = px.scatter(df, x='f0', y='f1', color='label', hover_name='filename')
 
-    current_dict = st.plotly_chart(fig, on_select='rerun', selection_mode='points')
+    col1, col2 = st.columns([4, 1])
+
+    with col1:
+        current_dict = st.plotly_chart(fig, on_select='rerun', selection_mode='points')
 
     click_check = current_dict['selection']['point_indices']
     if click_check:
         image_path = current_dict['selection']['points'][0]['hovertext']
         with Image.open(image_path) as img:
-            st.image(img, caption=f'{image_path}')
+            with col2:
+                st.image(img, caption=f'{image_path}')
 
         st.write(current_dict)
 
